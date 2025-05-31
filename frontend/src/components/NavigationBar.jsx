@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 const Navbar = () => {
   const pathname = usePathname();
   const [isMounted, setIsMounted] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -15,44 +16,46 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", url: "/" },
-    { name: "About", url: "/about" },
+    { name: "Photo", url: "/photo" },
     { name: "Gifts", url: "/gifts" },
-    { name: "Party", url: "/party" },
     { name: "Contact", url: "/contact" }
+    // { name: "Party", url: "/party" },
   ];
 
-  // Array of bright, playful colors
+  // Professional yet playful color palette
   const colors = [
-    "#FF6B6B", // Coral
-    "#4ECDC4", // Teal
-    "#FFBE0B", // Yellow
-    "#FB5607", // Orange
-    "#8338EC", // Purple
-    "#3A86FF"  // Blue
+    "#5E81AC", // Soft blue
+    "#88C0D0", // Light teal
+    "#8FBCBB", // Muted seafoam
+    "#A3BE8C", // Soft green
+    "#D08770", // Warm peach
+    "#B48EAD"  // Soft lavender
   ];
 
   return (
     <>
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Bubblegum+Sans&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Fredoka+One&display=swap');
         
         .navbar {
-          font-family: 'Comic Neue', 'Bubblegum Sans', cursive;
-          box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+          font-family: 'Poppins', sans-serif;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+          background: white;
         }
         
-        .rainbow-bg {
+        .logo-font {
+          font-family: 'Fredoka One', cursive;
+        }
+        
+        .gradient-bg {
           background: linear-gradient(
-            90deg,
+            135deg,
             ${colors[0]} 0%,
-            ${colors[1]} 20%,
-            ${colors[2]} 40%,
-            ${colors[3]} 60%,
-            ${colors[4]} 80%,
-            ${colors[5]} 100%
+            ${colors[2]} 50%,
+            ${colors[4]} 100%
           );
-          background-size: 400% 400%;
-          animation: gradient 15s ease infinite;
+          background-size: 200% 200%;
+          animation: gradient 10s ease infinite;
         }
         
         @keyframes gradient {
@@ -61,59 +64,54 @@ const Navbar = () => {
           100% { background-position: 0% 50%; }
         }
         
-        @keyframes bounce {
+        @keyframes subtleBounce {
           0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
+          50% { transform: translateY(-5px); }
         }
         
-        @keyframes wiggle {
-          0% { transform: rotate(0deg); }
-          25% { transform: rotate(5deg); }
-          50% { transform: rotate(-5deg); }
-          75% { transform: rotate(2deg); }
-          100% { transform: rotate(0deg); }
+        @keyframes gentlePulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
         }
         
-        @keyframes float {
-          0% { transform: translateY(0px); }
-          50% { transform: translateY(-8px); }
-          100% { transform: translateY(0px); }
+        @keyframes slideDown {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
         }
         
-        .animate-bounce {
-          animation: bounce 2s infinite;
+        .animate-subtle-bounce {
+          animation: subtleBounce 3s infinite;
         }
         
-        .animate-wiggle {
-          animation: wiggle 1s ease infinite;
+        .animate-gentle-pulse {
+          animation: gentlePulse 2s ease-in-out infinite;
         }
         
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
+        .animate-slide-down {
+          animation: slideDown 0.3s ease-out forwards;
         }
         
         .nav-item {
           position: relative;
-          transition: all 0.3s ease;
+          transition: all 0.2s ease;
         }
         
         .nav-item:hover {
-          transform: scale(1.1);
+          transform: translateY(-2px);
         }
         
         .nav-item.active {
-          transform: scale(1.1);
+          font-weight: 600;
         }
         
         .nav-item::after {
           content: '';
           position: absolute;
-          bottom: -5px;
+          bottom: -2px;
           left: 0;
           width: 0;
-          height: 4px;
-          border-radius: 2px;
-          background-color: white;
+          height: 2px;
+          background-color: currentColor;
           transition: width 0.3s ease;
         }
         
@@ -122,75 +120,116 @@ const Navbar = () => {
           width: 100%;
         }
         
-        .logo-text {
-          text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
-          letter-spacing: 1px;
+        .mobile-menu {
+          transition: all 0.3s ease;
+          overflow: hidden;
         }
         
-        .confetti {
-          position: absolute;
-          width: 10px;
-          height: 10px;
-          background-color: ${colors[Math.floor(Math.random() * colors.length)]};
+        .mobile-menu.open {
+          max-height: 500px;
+          opacity: 1;
+        }
+        
+        .mobile-menu.closed {
+          max-height: 0;
           opacity: 0;
+        }
+        
+        .menu-button {
+          transition: all 0.3s ease;
+        }
+        
+        .menu-button:hover {
+          transform: rotate(90deg);
         }
       `}</style>
 
-      <nav className="navbar rainbow-bg fixed w-full z-50">
+      <nav className="navbar fixed w-full z-50">
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 items-center">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
               <div 
-                className={`mr-2 ${isMounted ? 'animate-float' : 'opacity-0'}`}
+                className={`mr-2 ${isMounted ? 'animate-subtle-bounce' : 'opacity-0'}`}
                 style={{ animationDelay: '0.1s' }}
               >
                 <Image 
-                  src="/gift-icon.png" 
-                  width={50} 
-                  height={50} 
+                  src="/Corporate-Gifts-India.webp" 
+                  width={40} 
+                  height={40} 
                   alt="Gift Store Logo"
-                  className="animate-wiggle"
+                  // className="animate-gentle-pulse"
                 />
               </div>
               <Link 
                 href="/" 
-                className={`text-2xl text-white logo-text ${isMounted ? 'animate-bounce' : 'opacity-0'}`}
-                style={{ animationDelay: '0.2s' }}
+                className={`text-xl gradient-text logo-font ${isMounted ? 'animate-gentle-pulse' : 'opacity-0'}`}
+                style={{ animationDelay: '0.1s' }}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
-                <span className="font-bold">Ammu's</span> Wonder Gifts
+                <span className="text-[#5E81AC]">Ammu's</span> <span className="text-[#D08770]">Gifts</span>
+                 {/* <span className="text-[#A3BE8C]">Gifts</span> */}
               </Link>
             </div>
             
-            <div className="hidden sm:flex sm:space-x-6">
-              {navItems.map((route, index) => {
-                const color = colors[index % colors.length];
-                return (
-                  <Link 
-                    key={route.url} 
-                    href={route.url} 
-                    className={`
-                      nav-item text-white font-bold px-4 py-2 rounded-full
-                      ${pathname === route.url ? 'active' : ''}
-                      ${isMounted ? 'animate-float' : 'opacity-0'}
-                    `}
-                    style={{ 
-                      backgroundColor: pathname === route.url ? `${color}CC` : 'transparent',
-                      animationDelay: `${0.3 + index * 0.1}s`
-                    }}
-                  >
-                    {route.name}
-                  </Link>
-                );
-              })}
+            {/* Desktop Navigation */}
+            <div className="hidden sm:flex sm:space-x-4">
+              {navItems.map((route, index) => (
+                <Link 
+                  key={route.url} 
+                  href={route.url} 
+                  className={`
+                    nav-item px-3 py-2 rounded-md
+                    ${pathname === route.url ? `text-[#5E81AC] active` : 'text-gray-700 hover:text-[#5E81AC]'}
+                    ${isMounted ? 'animate-slide-down' : 'opacity-100'}
+                  `}
+                  style={{ 
+                    animationDelay: `${0.3 + index * 0.1}s`
+                  }}
+                >
+                  {route.name}
+                </Link>
+              ))}
             </div>
             
-            {/* Mobile menu button would go here */}
+            {/* Mobile menu button */}
             <div className="sm:hidden">
-              <button className="text-white">
-                <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+              <button 
+                className="menu-button text-gray-700 p-2 rounded-md hover:text-[#5E81AC]"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
+                {isMobileMenuOpen ? (
+                  <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
               </button>
+            </div>
+          </div>
+          
+          {/* Mobile Menu */}
+          <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : 'closed'} sm:hidden`}>
+            <div className="pt-2 pb-4 space-y-1">
+              {navItems.map((route, index) => (
+                <Link
+                  key={route.url}
+                  href={route.url}
+                  className={`
+                    block px-4 py-3 rounded-md text-base
+                    ${pathname === route.url ? `text-white bg-[${colors[index % colors.length]}]` : 'text-gray-700 hover:bg-gray-100'}
+                    animate-slide-down
+                  `}
+                  style={{
+                    animationDelay: `${0.1 + index * 0.05}s`
+                  }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {route.name}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
