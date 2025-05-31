@@ -140,7 +140,7 @@ const Navbar = () => {
         }
         
         .menu-button:hover {
-          transform: rotate(90deg);
+          transform: rotate(0deg);
         }
       `}</style>
 
