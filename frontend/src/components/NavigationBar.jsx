@@ -219,7 +219,7 @@ const Navbar = () => {
                   href={route.url}
                   className={`
                     block px-4 py-3 rounded-md text-base
-                    ${pathname === route.url ? `text-white bg-[${colors[index % colors.length]}]` : 'text-gray-700 hover:bg-gray-100'}
+                    ${pathname === route.url ? `text-[#5E81AC] bg-[${colors[index % colors.length]}]` : 'text-gray-700 hover:bg-gray-100'}
                     animate-slide-down
                   `}
                   style={{
