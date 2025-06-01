@@ -55,7 +55,7 @@ export default function Home() {
 
   return (
     <>
-     <style jsx global>{`
+      <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Fredoka+One&display=swap');
         
         body {
@@ -141,7 +141,7 @@ export default function Home() {
 
       {/* <Navbar /> */}
       {/* Hero Section */}
-      <br/>
+      <br />
       <section className="hero-gradient text-white py-16  md:py-24">
         <div className="container mx-auto px-6 pt-25 text-center">
           <h1 className={`text-4xl md:text-6xl font-bold mb-6 ${isMounted ? 'animate-slide-up' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
@@ -160,23 +160,23 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
+
       {/* Featured Categories */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Our Featured Collections</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {featuredCategories.map((category, index) => (
-              <div 
+              <div
                 key={category.name}
                 className={`category-card bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 ${isMounted ? 'animate-fade-in' : 'opacity-0'}`}
-                style={{ 
+                style={{
                   animationDelay: `${0.3 + index * 0.2}s`,
                   borderTop: `4px solid ${colors[index % colors.length]}`
                 }}
               >
                 <div className="h-48 relative">
-                  <Image 
+                  <Image
                     src={category.image}
                     alt={category.name}
                     layout="fill"
@@ -187,8 +187,8 @@ export default function Home() {
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2 text-gray-800">{category.name}</h3>
                   <p className="text-gray-600 mb-4">{category.description}</p>
-                  <Link 
-                    href="/gifts" 
+                  <Link
+                    href="/gifts"
                     className={`inline-block text-sm font-medium py-2 px-4 rounded-full`}
                     style={{ backgroundColor: colors[index % colors.length], color: 'white' }}
                   >
@@ -200,59 +200,59 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
+
       {/* About Section */}
-<section className="py-12 md:py-16 bg-gray-50">
-  <div className="container mx-auto px-4 sm:px-6">
-    <div className="flex flex-col md:flex-row items-center">
-      {/* Image Column - Order changed for mobile */}
-      <div className={`w-full md:w-1/2 mb-8 md:mb-0 md:pr-12 ${isMounted ? 'animate-fade-in' : 'opacity-0'}`} 
-           style={{ animationDelay: '0.4s' }}>
-        <div className="relative h-64 sm:h-80 w-full rounded-xl overflow-hidden shadow-lg">
-          <Image 
-            src="/our-story.png"
-            alt="About Ammu's Gifts"
-            layout="fill"
-            objectFit="cover"
-            priority
-          />
+      <section className="py-12 md:py-16 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="flex flex-col md:flex-row items-center">
+            {/* Image Column - Order changed for mobile */}
+            <div className={`w-full md:w-1/2 mb-8 md:mb-0 md:pr-12 ${isMounted ? 'animate-fade-in' : 'opacity-0'}`}
+              style={{ animationDelay: '0.4s' }}>
+              <div className="relative h-64 sm:h-80 w-full rounded-xl overflow-hidden shadow-lg">
+                <Image
+                  src="/our-story.png"
+                  alt="About Ammu's Gifts"
+                  layout="fill"
+                  objectFit="cover"
+                  priority
+                />
+              </div>
+            </div>
+
+            {/* Text Column */}
+            <div className={`w-full md:w-1/2 ${isMounted ? 'animate-fade-in' : 'opacity-0'}`}
+              style={{ animationDelay: '0.6s' }}>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-gray-800">Our Story</h2>
+              <p className="text-gray-600 mb-3 sm:mb-4 text-sm sm:text-base">
+                At Ammu Gifts, we believe that the perfect gift can create moments of joy that last a lifetime.
+                Founded in 2022, we've been helping customers find thoughtful, unique gifts for all occasions.
+              </p>
+              <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
+                Each item in our collection is carefully curated to ensure quality and uniqueness. Whether you're
+                celebrating a birthday, anniversary, or just want to show someone you care, we have something special for you.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-block btn-primary text-white font-medium py-2 px-6 sm:py-3 sm:px-8 rounded-full text-sm sm:text-lg"
+              >
+                Contact Us
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
-      
-      {/* Text Column */}
-      <div className={`w-full md:w-1/2 ${isMounted ? 'animate-fade-in' : 'opacity-0'}`} 
-           style={{ animationDelay: '0.6s' }}>
-        <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-gray-800">Our Story</h2>
-        <p className="text-gray-600 mb-3 sm:mb-4 text-sm sm:text-base">
-          At Ammu Gifts, we believe that the perfect gift can create moments of joy that last a lifetime. 
-          Founded in 2022, we've been helping customers find thoughtful, unique gifts for all occasions.
-        </p>
-        <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
-          Each item in our collection is carefully curated to ensure quality and uniqueness. Whether you're 
-          celebrating a birthday, anniversary, or just want to show someone you care, we have something special for you.
-        </p>
-        <Link 
-          href="/contact" 
-          className="inline-block btn-primary text-white font-medium py-2 px-6 sm:py-3 sm:px-8 rounded-full text-sm sm:text-lg"
-        >
-          Contact Us
-        </Link>
-      </div>
-    </div>
-  </div>
-</section>
-      
-      
+      </section>
+
+
       {/* Testimonials */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">What Our Customers Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div 
+              <div
                 key={index}
                 className={`testimonial-card bg-gray-50 p-8 rounded-xl shadow-md ${isMounted ? 'animate-fade-in' : 'opacity-0'}`}
-                style={{ 
+                style={{
                   animationDelay: `${0.3 + index * 0.2}s`,
                   borderBottom: `4px solid ${colors[index % colors.length]}`
                 }}
@@ -264,7 +264,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
+
       {/* Call to Action */}
       <section className="py-16" style={{ backgroundColor: colors[2] }}>
         <div className="container mx-auto px-6 text-center">
@@ -272,16 +272,14 @@ export default function Home() {
           <p className="text-xl mb-8 text-white opacity-90 max-w-2xl mx-auto">
             Browse our collection of unique gifts that will make your loved ones feel special.
           </p>
-          <Link 
-            href="/gifts" 
+          <Link
+            href="/gifts"
             className="inline-block bg-white text-gray-800 font-medium py-3 px-8 rounded-full text-lg hover:bg-gray-100 transition-all"
           >
             Shop Now
           </Link>
         </div>
       </section>
-      
-     
     </>
   );
 }
