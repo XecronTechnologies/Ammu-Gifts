@@ -68,8 +68,7 @@ export default function Home() {
           background: linear-gradient(
             135deg,
             ${colors[0]} 0%,
-            ${colors[2]} 50%,
-            ${colors[4]} 100%
+            ${colors[1]} 100%
           );
           background-size: 200% 200%;
           animation: gradient 10s ease infinite;
@@ -143,10 +142,10 @@ export default function Home() {
       {/* <Navbar /> */}
       {/* Hero Section */}
       <br/>
-      <section className="hero-gradient text-white py-16 md:py-24">
-        <div className="container mx-auto px-6 text-center">
+      <section className="hero-gradient text-white py-16  md:py-24">
+        <div className="container mx-auto px-6 pt-25 text-center">
           <h1 className={`text-4xl md:text-6xl font-bold mb-6 ${isMounted ? 'animate-slide-up' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
-            <span className="logo-font">Ammu's Gifts</span>
+            <span className="logo-font">Ammu Gifts</span>
           </h1>
           <p className={`text-xl md:text-2xl mb-8 max-w-2xl mx-auto ${isMounted ? 'animate-slide-up' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
             Thoughtful gifts that bring smiles and create lasting memories
@@ -203,39 +202,46 @@ export default function Home() {
       </section>
       
       {/* About Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className={`md:w-1/2 mb-8 md:mb-0 md:pr-12 ${isMounted ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
-              <div className="relative h-80 w-full rounded-xl overflow-hidden shadow-lg">
-                <Image 
-                  src="/our-story.png"
-                  alt="About Ammu's Gifts"
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-            </div>
-            <div className={`md:w-1/2 ${isMounted ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: '0.6s' }}>
-              <h2 className="text-3xl font-bold mb-6 text-gray-800">Our Story</h2>
-              <p className="text-gray-600 mb-4">
-                At Ammu's Gifts, we believe that the perfect gift can create moments of joy that last a lifetime. 
-                Founded in 2010, we've been helping customers find thoughtful, unique gifts for all occasions.
-              </p>
-              <p className="text-gray-600 mb-6">
-                Each item in our collection is carefully curated to ensure quality and uniqueness. Whether you're 
-                celebrating a birthday, anniversary, or just want to show someone you care, we have something special for you.
-              </p>
-              <Link 
-                href="/contact" 
-                className="inline-block btn-primary text-white font-medium py-3 px-8 rounded-full text-lg"
-              >
-                Contact Us
-              </Link>
-            </div>
-          </div>
+<section className="py-12 md:py-16 bg-gray-50">
+  <div className="container mx-auto px-4 sm:px-6">
+    <div className="flex flex-col md:flex-row items-center">
+      {/* Image Column - Order changed for mobile */}
+      <div className={`w-full md:w-1/2 mb-8 md:mb-0 md:pr-12 ${isMounted ? 'animate-fade-in' : 'opacity-0'}`} 
+           style={{ animationDelay: '0.4s' }}>
+        <div className="relative h-64 sm:h-80 w-full rounded-xl overflow-hidden shadow-lg">
+          <Image 
+            src="/our-story.png"
+            alt="About Ammu's Gifts"
+            layout="fill"
+            objectFit="cover"
+            priority
+          />
         </div>
-      </section>
+      </div>
+      
+      {/* Text Column */}
+      <div className={`w-full md:w-1/2 ${isMounted ? 'animate-fade-in' : 'opacity-0'}`} 
+           style={{ animationDelay: '0.6s' }}>
+        <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-gray-800">Our Story</h2>
+        <p className="text-gray-600 mb-3 sm:mb-4 text-sm sm:text-base">
+          At Ammu Gifts, we believe that the perfect gift can create moments of joy that last a lifetime. 
+          Founded in 2022, we've been helping customers find thoughtful, unique gifts for all occasions.
+        </p>
+        <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
+          Each item in our collection is carefully curated to ensure quality and uniqueness. Whether you're 
+          celebrating a birthday, anniversary, or just want to show someone you care, we have something special for you.
+        </p>
+        <Link 
+          href="/contact" 
+          className="inline-block btn-primary text-white font-medium py-2 px-6 sm:py-3 sm:px-8 rounded-full text-sm sm:text-lg"
+        >
+          Contact Us
+        </Link>
+      </div>
+    </div>
+  </div>
+</section>
+      
       
       {/* Testimonials */}
       <section className="py-16 bg-white">

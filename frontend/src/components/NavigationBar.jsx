@@ -18,8 +18,8 @@ const Navbar = () => {
     { name: "Home", url: "/" },
     { name: "Photo", url: "/photo" },
     { name: "Gifts", url: "/gifts" },
-    { name: "Contact", url: "/contact" }
-    // { name: "Party", url: "/party" },
+    { name: "Contact", url: "/contact" },
+    // { name: "Admin", url: "/admin" },
   ];
 
   // Professional yet playful color palette
@@ -166,7 +166,7 @@ const Navbar = () => {
                 style={{ animationDelay: '0.1s' }}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <span className="text-[#5E81AC]">Ammu's</span> <span className="text-[#D08770]">Gifts</span>
+                <span className="text-[#5E81AC]">Ammu</span> <span className="text-[#D08770]">Gifts</span>
                  {/* <span className="text-[#A3BE8C]">Gifts</span> */}
               </Link>
             </div>
